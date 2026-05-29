@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografía Interactiva: Dinámica y Táctica del Balonmano</title>
+    
+    <!-- Meta tags para PWA -->
+    <meta name="theme-color" content="#0d1117">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- Web App Manifest Embebido vía Data URI -->
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkluZm9ncmFmaWEgSW50ZXJhY3RpdmEgQmFsb25tYW5vIiwKICAic2hvcnRfbmFtZSI6ICJCYWxvbm1hbm9UYWN0aWNvIiwKICAic3RhcnRfdXJsIjogIi4iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIi0wZDExMTciLAogICJ0aGVtZV9jb2xvciI6ICIjMDBmMmVmIiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sO3V0ZjgsPFNWRyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48Y2lyY2xlIGN4PSIyNTYiIGN5PSIyNTYiIHI9IjI0MCIgZmlsbD0iIzBkMTExNyIgc3Ryb2tlPSIjMDBmMmVmIiBzdHJva2Utd2lkdGg9IjE2Ii8+PHRleHQgeD0iNTAlIiB5PSI1NSUiIGZvbnQtc2l6ZT0iMTgwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMDBmMmVmIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIsZm9udC13ZWlnaHQ9ImJvbGQiPkJNPC90ZXh0PjwvU1ZHPiIsCiAgICAgICJzaXplcyI6ICI1MTJ4NTEyIiwKICAgICAgInR5cGUiOiAiaW1hZ2Uvc3ZnK3htbCIKICAgIH0KICBdCn0=">
+
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-principal: #0b0f19;
+            --bg-card: rgba(22, 30, 49, 0.7);
+            --border-card: rgba(0, 242, 239, 0.15);
+            --color-c突出: #00f2ef; /* Cian eléctrico */
+            --color-acento: #ff9f43; /* Naranja deportivo */
+            --texto-principal: #f8f9fa;
+            --texto-secundario: #a0aec0;
+        }
+
+        /* Modo de Alto Contraste Opcional */
+        body.alto-contraste {
+            --bg-principal: #000000;
+            --bg-card: #111111;
+            --border-card: #ffffff;
+            --color-c突出: #ffff00;
+            --color-acento: #00ffff;
+            --texto-principal: #ffffff;
+            --texto-secundario: #ffffff;
+        }
+
+        body {
+            background-color: var(--bg-principal);
+            color: var(--texto-principal);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--color-c突出);
+            color: #000;
+            padding: 8px;
+            z-index: 100;
+            transition: top 0.2s;
+        }
+        .skip-link:focus { top: 0; }
+
+        /* Estilo Premium Glassmorphism */
+        .glass-panel {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-card);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        /* Efectos Hover Basados en Criterios de Prismic */
+        .hover-glow:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px rgba(0, 242, 239, 0.35);
+            border-color: var(--color-c突出);
+            cursor: pointer;
+        }
+
+        .hover-list-item {
+            transition: transform 0.2s ease, color 0.2s ease;
+        }
+        .hover-list-item:hover {
+            transform: translateX(8px);
+            color: var(--color-c突出);
+        }
+
+        .btn-premium-cian {
+            background: transparent;
+            border: 2px solid var(--color-c突出);
+            color: var(--color-c突出);
+            font-weight: 600;
+            border-radius: 8px;
+            padding: 10px 24px;
+            transition: all 0.3s;
+        }
+        .btn-premium-cian:hover, .btn-premium-cian:focus {
+            background: var(--color-c突出);
+            color: #0b0f19;
+            box-shadow: 0 0 15px var(--color-c突出);
+            outline: none;
+        }
+
+        /* Reducción de animaciones si el usuario lo prefiere */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+
+        /* Mapa Conceptual Holográfico */
+        .hub-container {
+            position: relative;
+            min-height: 550px;
+        }
+        .core-node {
+            background: radial-gradient(circle, rgba(0,242,239,0.2) 0%, rgba(11,15,25,1) 70%);
+            border: 2px dashed var(--color-c突出);
+            border-radius: 50%;
+            width: 180px;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(0, 242, 239, 0.2);
+            z-index: 2;
+            animation: pulse-core 4s infinite alternate;
+        }
+        @keyframes pulse-core {
+            0% { transform: scale(1); box-shadow: 0 0 30px rgba(0,242,239,0.2); }
+            100% { transform: scale(1.05); box-shadow: 0 0 50px rgba(0,242,239,0.5); }
+        }
+
+        /* Diseño de la Cancha */
+        .tactical-court {
+            width: 100%;
+            max-width: 700px;
+            background-color: #14233c;
+            border: 3px solid #fff;
+            position: relative;
+            border-radius: 4px;
+            margin: 0 auto;
+        }
+        .court-area-6m {
+            position: absolute;
+            left: 0;
+            top: 15%;
+            width: 15%;
+            height: 70%;
+            border: 2px dashed rgba(255,255,255,0.7);
+            border-left: none;
+            background: rgba(0, 242, 239, 0.1);
+            border-top-right-radius: 50%;
+            border-bottom-right-radius: 50%;
+        }
+
+        /* Estilos del Quiz */
+        .quiz-option {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--texto-principal);
+            text-align: left;
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+        .quiz-option:hover:not(:disabled) {
+            background: rgba(255,255,255,0.15);
+        }
+        .quiz-option.correct {
+            background-color: #2ecc71 !important;
+            border-color: #2ecc71;
+            color: #fff;
+        }
+        .quiz-option.incorrect {
+            background-color: #e74c3c !important;
+            border-color: #e74c3c;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
+
+    <!-- Encabezado / Accesibilidad -->
+    <div class="container mt-3 d-flex justify-content-end">
+        <button class="btn btn-sm btn-outline-secondary text-white" id="btn-contraste" aria-label="Cambiar modo de contraste">
+            👁️ Alternar Alto Contraste
+        </button>
+    </div>
+
+    <!-- 1. HERO PRINCIPAL -->
+    <header class="container my-5 text-center">
+        <h1 class="display-3 fw-bold text-uppercase">Balonmano <span style="color: var(--color-c突出);">Táctico</span></h1>
+        <p class="lead text-muted max-width-md mx-auto fs-4" style="color: var(--texto-secundario) !important;">
+            Infografía Avanzada y Análisis de Rendimiento Deportivo.
+        </p>
+        <div class="badge bg-dark border border-secondary px-3 py-2 text-uppercase tracking-wider mb-4">
+            ⚡ Recurso Pedagógico para Adultos (30-50 años)
+        </div>
+        <div class="d-flex justify-content-center gap-3">
+            <a href="#hub-navegacion" class="btn btn-premium-cian">Explorar Sistema</a>
+            <a href="#seccion-evaluacion" class="btn btn-outline-light px-4 py-2">Ir al Test Táctico</a>
+        </div>
+        
+        <!-- Métricas Rápidas / Bento Corto -->
+        <div class="row g-3 mt-5">
+            <div class="col-6 col-md-3">
+                <div class="glass-panel text-center">
+                    <span class="d-block display-6 fw-bold" style="color: var(--color-acento);">40x20</span>
+                    <small class="text-uppercase text-muted">Metros de Cancha</small>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="glass-panel text-center">
+                    <span class="d-block display-6 fw-bold" style="color: var(--color-acento);">60 min</span>
+                    <small class="text-uppercase text-muted">Duración Estándar</small>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="glass-panel text-center">
+                    <span class="d-block display-6 fw-bold" style="color: var(--color-acento);">7 v 7</span>
+                    <small class="text-uppercase text-muted">Jugadores en Acción</small>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="glass-panel text-center">
+                    <span class="d-block display-6 fw-bold" style="color: var(--color-acento);">100%</span>
+                    <small class="text-uppercase text-muted">Uso de Yemas</small>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="contenido-principal">
+        
+        <!-- 2. HUB CENTRAL (MAPA CONCEPTUAL / BENTO UI) -->
+        <section class="container my-5" id="hub-navegacion">
+            <h2 class="h3 mb-4 text-center text-md-start">📍 Mapa Conceptual de Exploración Autónoma</h2>
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-4">
+                    <div class="glass-panel">
+                        <h3 class="h5" style="color: var(--color-c突出);">Arquitectura del Juego</h3>
+                        <p class="small text-muted">Selecciona los módulos interactivos de la derecha o desliza hacia abajo para profundizar progresivamente en las capas analíticas del balonmano.</p>
+                        <ul class="list-unstyled mt-3">
+                            <li class="py-2 border-bottom border-secondary hover-list-item">🔹 Explotación de espacios vacíos</li>
+                            <li class="py-2 border-bottom border-secondary hover-list-item">🔹 Rotación fluida en sistemas ofensivos</li>
+                            <li class="py-2 hover-list-item">🔹 Toma de decisiones bajo fatiga</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Grilla Estilo Bento conectada al núcleo -->
+                <div class="col-lg-8">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="glass-panel hover-glow" onclick="mostrarDetalle('reglas')">
+                                <h4 class="h6 text-uppercase tracking-wider text-muted">01 / Estructura</h4>
+                                <h3 class="h5 fw-bold">Reglas de Juego Fundamentales</h3>
+                                <p class="small mb-0 text-secondary">Tiempos, sustituciones rápidas y control técnico de balón.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="glass-panel hover-glow" onclick="mostrarDetalle('tacticas')">
+                                <h4 class="h6 text-uppercase tracking-wider text-muted">02 / Estratagema</h4>
+                                <h3 class="h5 fw-bold">Jugadas y Dinámicas Críticas</h3>
+                                <p class="small mb-0 text-secondary">Análisis del Cruce, Bloqueos y Fijaciones defensivas.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="glass-panel hover-glow d-flex justify-content-between align-items-center" onclick="document.getElementById('seccion-cancha').scrollIntoView({behavior: 'smooth'})">
+                                <div>
+                                    <h4 class="h6 text-uppercase tracking-wider text-muted">03 / Espacial</h4>
+                                    <h3 class="h5 fw-bold mb-1">Geometría de la Cancha 40x20m</h3>
+                                    <p class="small mb-0 text-secondary">Zonas restrictivas y puntos estratégicos de tiro libre y penalti.</p>
+                                </div>
+                                <span class="fs-2 text-info">→</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. PANEL VISUAL DE LA CANCHA -->
+        <section class="container my-5 pt-4" id="seccion-cancha">
+            <div class="glass-panel">
+                <div class="row align-items-center">
+                    <div class="col-md-5">
+                        <h2 class="h2 fw-bold mb-3">La Cancha de Juego</h2>
+                        <p class="text-secondary">El rectángulo oficial mide <strong>40 metros de largo por 20 metros de ancho</strong>. El control perimetral y espacial divide el éxito del fracaso táctico.</p>
+                        <div class="accordion accordion-flush bg-transparent" id="accordionCancha">
+                            <div class="accordion-item bg-transparent text-white border-secondary">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed bg-transparent text-white" type="button" data-bs-toggle="collapse" data-bs-target="#c1">
+                                        Línea de Área de Portería (6 metros)
+                                    </button>
+                                </h2>
+                                <div id="c1" class="accordion-collapse collapse" data-bs-parent="#accordionCancha">
+                                    <div class="accordion-body small text-muted">
+                                        Zona exclusiva del portero. Ningún jugador de campo puede pisarla con el balón en posesión para atacar o defender.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item bg-transparent text-white border-secondary">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed bg-transparent text-white" type="button" data-bs-toggle="collapse" data-bs-target="#c2">
+                                        Línea de Golpe Franco (9 metros)
+                                    </button>
+                                </h2>
+                                <div id="c2" class="accordion-collapse collapse" data-bs-parent="#accordionCancha">
+                                    <div class="accordion-body small text-muted">
+                                        Línea discontinua desde donde se reanudan las faltas cometidas entre la zona de 6m y 9m. Los atacantes deben situarse fuera.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7 mt-4 mt-md-0">
+                        <!-- Canvas / SVG Representativo de la cancha táctica -->
+                        <div class="tactical-court p-4 text-center">
+                            <div class="court-area-6m"></div>
+                            <span class="badge bg-dark border text-uppercase border-info mt-5">Zona del Portero (6m)</span>
+                            <div style="border-left: 2px dashed #ff9f43; height: 100px; position: absolute; left: 22%; top: 25%;"></div>
+                            <small class="d-block mt-5 text-white-50 text-end">Línea de 9m (Discontinua) ⤏</small>
+                            <div class="my-4 fw-bold text-center border-top border-bottom py-2">Línea Central (Mitad de Campo)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. TARJETAS DE POSICIONES -->
+        <section class="container my-5">
+            <h2 class="h3 mb-4 text-center">🛡️ Posiciones en el Sistema Ofensivo-Defensivo</h2>
+            <div class="row g-3" id="contenedor-posiciones">
+                <!-- Inyectado por JS de forma dinámica para modularidad -->
+            </div>
+        </section>
+
+        <!-- 5. TÉCNICAS DE LANZAMIENTO & 6. ENFOQUE PORTERO -->
+        <section class="container my-5">
+            <div class="row g-4">
+                <div class="col-lg-7">
+                    <div class="glass-panel h-100">
+                        <h2 class="h3 mb-4">🤾 Ejecución Técnica de Lanzamientos</h2>
+                        <div class="row g-3">
+                            <div class="col-12 hover-list-item p-3 border-start border-3 border-info bg-dark bg-opacity-20 rounded-end">
+                                <h4 class="h5 fw-bold mb-1">Lanzamiento en Suspensión</h4>
+                                <p class="small text-muted mb-0">El jugador se eleva verticalmente sobrepasando la defensa por altura y ejecuta el tiro en el punto máximo antes de caer.</p>
+                            </div>
+                            <div class="col-12 hover-list-item p-3 border-start border-3 border-warning bg-dark bg-opacity-20 rounded-end">
+                                <h4 class="h5 fw-bold mb-1">Lanzamiento en Apoyo</h4>
+                                <p class="small text-muted mb-0">Manteniendo los pies firmes sobre el suelo, permite amagar la trayectoria, cambiar el ángulo del eje corporal y rectificar hacia los lados.</p>
+                            </div>
+                            <div class="col-12 hover-list-item p-3 border-start border-3 border-danger bg-dark bg-opacity-20 rounded-end">
+                                <h4 class="h5 fw-bold mb-1">Lanzamiento de Cadera</h4>
+                                <p class="small text-muted mb-0">Se oculta la trayectoria armando el tiro por debajo de la línea de la cintura, sorprendiendo la visión reactiva del arquero.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="glass-panel h-100 border-warning position-relative overflow-hidden" style="background: linear-gradient(145deg, rgba(22,30,49,0.9) 0%, rgba(11,15,25,1) 100%);">
+                        <div class="position-absolute end-0 top-0 p-3 opacity-10 display-1 fw-bold">🧤</div>
+                        <h2 class="h3 mb-3 text-warning">El Guardameta: Eje Determinante</h2>
+                        <p class="text-secondary">No es un mero espectador pasivo. Su rendimiento dicta el orden de la escuadra:</p>
+                        <ul class="text-muted small">
+                            <li class="mb-2"><strong>Seguridad Estructural:</strong> Coordina la colocación del bloque defensivo central.</li>
+                            <li class="mb-2"><strong>Visión de Transición:</strong> Prácticamente la totalidad de los contraataques dinámicos nacen de sus manos en milisegundos tras la parada.</li>
+                            <li class="mb-2"><strong>Lanzamiento de 7 Metros:</strong> La contención de penaltis requiere alta dosis de anticipación analítica y templanza.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. AUTOEVALUACIÓN INTERACTIVA -->
+        <section class="container my-5" id="seccion-evaluacion">
+            <div class="glass-panel border-info">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h2 class="h3 fw-bold">Evaluación de Diagnóstico Táctico</h2>
+                        <p class="text-muted small">Valida el nivel de comprensión conceptual inmediata del balonmano para entornos competitivos adultos.</p>
+                        <div class="mt-4">
+                            <span class="text-muted">Progreso:</span>
+                            <div class="progress mt-1 bg-dark" style="height: 6px;">
+                                <div id="quiz-progress" class="progress-bar bg-info" role="progressbar" style="width: 25%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8 mt-3 mt-md-0">
+                        <div id="quiz-box" aria-live="polite">
+                            <!-- Inyectado dinámicamente por JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- VENTANA MODAL PARA DETALLES DE CAPAS DE INFORMACIÓN -->
+    <div class="modal fade" id="modalDetalle" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-white" style="background-color: #0f172a; border: 1px solid var(--color-c突出);">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title fw-bold" id="modalTitle">Detalle Técnico</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body" id="modalBody">
+                    ...
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PIE DE PÁGINA (TAKEAWAY TÁCTICO) -->
+    <footer class="bg-dark text-secondary mt-5 py-4 border-top border-secondary text-center">
+        <div class="container">
+            <p class="mb-1 text-white-50 font-monospace">Takeaway Táctico: "La fluidez posicional y el control de las yemas anulan la ventaja antropométrica bruta."</p>
+            <p class="small mb-0">Desarrollado bajo estándares PWA y principios de diseño instruccional Mayer.</p>
+            <!-- ✏️ REEMPLAZA: Modifica el siguiente texto con tus datos institucionales -->
+            <p class="mt-2 text-info small">Creado por: <strong>[Tu Nombre y Apellido]</strong> | Curso de Recursos Interactivos, 2026</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 Bundle con Popper CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- LÓGICA DE DATOS Y COMPONENTES INTERACTIVOS (JAVASCRIPT VANILLA) -->
+    <script>
+        // Almacenamiento modular de datos del balonmano
+        const datosPosiciones = [
+            { nombre: "Portero", rol: "Eje Defensivo", desc: "Máxima velocidad de reacción. Inicia contraataques rápidos mediante pases de larga distancia precisos.", icon: "🧤" },
+            { nombre: "Central", rol: "Director de Juego", desc: "Organiza los sistemas tácticos en ataque. Distribuye balones y gestiona la toma de decisiones.", icon: "🧠" },
+            { nombre: "Pivote", rol: "Bloqueador / Fijador", desc: "Se posiciona en la línea de los 6 metros rivales abriendo huecos destructivos en la defensa para los laterales.", icon: "🏋️" },
+            { nombre: "Extremos (Izquierdo/Derecho)", rol: "Amplitud y Velocidad", desc: "Jugadores veloces y elásticos con capacidad de salto extremo para encarar la portería casi sin ángulo.", icon: "🏃" },
+            { nombre: "Laterales (Izquierdo/Derecho)", rol: "Potencia de Fuego", desc: "Especialistas en tiros de larga distancia sobrepasando el bloque defensivo por alto.", icon: "💥" }
+        ];
+
+        const detallesHub = {
+            reglas: {
+                titulo: "Reglas de Competición Oficial",
+                cuerpo: "<ul><li>Cada partido consta de <strong>dos tiempos de 30 minutos</strong> reales.</li><li>Los equipos se componen de <strong>7 jugadores activos</strong> simultáneamente en cancha.</li><li>El control del balón se realiza estrictamente con las <strong>yemas de los dedos</strong> para asegurar adherencia y precisión táctica rápida.</li></ul>"
+            },
+            tacticas: {
+                titulo: "Sistemas Dinámicos Avanzados",
+                cuerpo: "<ul><li><strong>El Cruce:</strong> Intercambio de puestos entre dos atacantes para desestabilizar las marcas asignadas del rival.</li><li><strong>Fijación Defensiva:</strong> Atraer la atención de un defensor para liberar de marcas a un compañero adyacente.</li><li><strong>Transición Ofensiva:</strong> Despliegue veloz coordinado con el portero directo al contragolpe.</li></ul>"
+            }
+        };
+
+        const bancoPreguntas = [
+            { q: "¿Cuáles son las dimensiones métricas oficiales de la cancha?", o: ["30m x 15m", "40m x 20m", "50m x 25m"], a: 1 },
+            { q: "¿Con qué parte de la mano se aconseja priorizar el agarre del balón?", o: ["Toda la palma", "Solo los pulgares", "Las yemas de los dedos"], a: 2 },
+            { q: "¿Qué acción crítica define principalmente el rol del portero en el partido?", o: ["Marcar goles de arco a arco", "Defender los lanzamientos de 7 metros y lanzar contraataques", "Hacer faltas tácticas"], a: 1 }
+        ];
+
+        let preguntaActual = 0;
+        let puntaje = 0;
+
+        // Renderizado Dinámico de las Posiciones
+        function inicializarPosiciones() {
+            const contenedor = document.getElementById('contenedor-posiciones');
+            contenedor.innerHTML = datosPosiciones.map((pos) => `
+                <div class="col-md-4 col-sm-6">
+                    <div class="glass-panel hover-glow h-100">
+                        <div class="fs-2 mb-2">${pos.icon}</div>
+                        <h3 class="h5 fw-bold mb-1">${pos.nombre}</h3>
+                        <span class="badge bg-secondary mb-2">${pos.rol}</span>
+                        <p class="small text-muted mb-0">${pos.desc}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Modales de Información Progresiva
+        function mostrarDetalle(llave) {
+            const info = detallesHub[llave];
+            document.getElementById('modalTitle').innerText = info.titulo;
+            document.getElementById('modalBody').innerHTML = info.cuerpo;
+            const miModal = new bootstrap.Modal(document.getElementById('modalDetalle'));
+            miModal.show();
+        }
+
+        // Lógica de Negocio del Quiz Interactiva
+        function cargarPregunta() {
+            if (preguntaActual >= bancoPreguntas.length) {
+                mostrarResultadoFinal();
+                return;
+            }
+            
+            const progreso = ((preguntaActual + 1) / bancoPreguntas.length) * 100;
+            document.getElementById('quiz-progress').style.width = `${progreso}%`;
+
+            const item = bancoPreguntas[preguntaActual];
+            const divQuiz = document.getElementById('quiz-box');
+            
+            divQuiz.innerHTML = `
+                <h3 class="h5 mb-3 fw-bold">${preguntaActual + 1}. ${item.q}</h3>
+                <div class="d-flex flex-column">
+                    ${item.o.map((opc, idx) => `
+                        <button class="quiz-option text-start" onclick="evaluarRespuesta(${idx})">${opc}</button>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function evaluarRespuesta(seleccionado) {
+            const opcionesBotones = document.querySelectorAll('.quiz-option');
+            const respuestaCorrecta = bancoPreguntas[preguntaActual].a;
+
+            opcionesBotones.forEach((btn, idx) => {
+                btn.disabled = true;
+                if (idx === respuestaCorrecta) {
+                    btn.classList.add('correct');
+                } else if (idx === seleccionado) {
+                    btn.classList.add('incorrect');
+                }
+            });
+
+            if (seleccionado === respuestaCorrecta) puntaje++;
+
+            setTimeout(() => {
+                preguntaActual++;
+                cargarPregunta();
+            }, 1800);
+        }
+
+        function mostrarResultadoFinal() {
+            const divQuiz = document.getElementById('quiz-box');
+            divQuiz.innerHTML = `
+                <div class="text-center py-4">
+                    <h3 class="h4 fw-bold text-success mb-2">¡Evaluación Finalizada!</h3>
+                    <p class="fs-5">Tu puntuación táctica es: <strong>${puntaje} de ${bancoPreguntas.length} aciertos</strong>.</p>
+                    <button class="btn btn-premium-cian mt-3" onclick="reiniciarQuiz()">Volver a intentar</button>
+                </div>
+            `;
+        }
+
+        function reiniciarQuiz() {
+            preguntaActual = 0;
+            puntaje = 0;
+            cargarPregunta();
+        }
+
+        // Alternancia de Accesibilidad - Alto Contraste
+        document.getElementById('btn-contraste').addEventListener('click', () => {
+            document.body.classList.toggle('alto-contraste');
+        });
+
+        // Orquestador Inicializador
+        document.addEventListener("DOMContentLoaded", () => {
+            inicializarPosiciones();
+            cargarPregunta();
+        });
+
+        // REGISTRO DEL SERVICE WORKER (Para soporte PWA)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                const swCodigo = `
+                    const CACHE_NAME = 'balonmano-v1';
+                    self.addEventListener('install', e => {
+                        self.skipWaiting();
+                    });
+                    self.addEventListener('fetch', e => {
+                        e.respondWith(fetch(e.request).catch(() => caches.match(e.request)));
+                    });
+                `;
+                const blob = new Blob([swCodigo], { type: 'application/javascript' });
+                const workerURL = URL.createObjectURL(blob);
+                navigator.serviceWorker.register(workerURL)
+                    .then(reg => console.log('PWA Service Worker registrado con éxito'))
+                    .catch(err => console.log('Fallo en el SW de la PWA', err));
+            });
+        }
+    </script>
+</body>
+</html>
